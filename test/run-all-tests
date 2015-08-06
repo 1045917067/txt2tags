@@ -5,6 +5,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 py.test-2.7
+pyflakes *.py */test_*.py
 
 # Uncomment the following lines to include the bash tests.
 #for SCRIPT in $(find . -name "run.sh"); do

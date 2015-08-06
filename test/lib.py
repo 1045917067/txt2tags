@@ -14,21 +14,22 @@ DIR = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(DIR)
 PYTHON = sys.executable
 
-# Path to txt2tags (change to '../txt2tagslite' for testing txt2tagslite)
+# Pass --txt2tagslite to py.test for testing txt2tagslite.
 TXT2TAGS = os.path.join(REPO, 'txt2tags')
 
 CONFIG_FILE = 'config'
 CSS_FILE = 'css'
 DIR_OK = 'ok'
 
-# Force absolute path and set default options.
-TXT2TAGS = [os.path.abspath(TXT2TAGS), '-q', '--no-rc']
-
 EXTENSION = {
     'aat': 'txt', 'aap': 'txt', 'aas': 'txt', 'txt': 'txt',
     'aatw': 'html', 'aapw': 'html', 'aasw': 'html', 'html5': 'html',
     'htmls': 'html', 'xhtml': 'html', 'xhtmls': 'html', 'csvs': 'csv',
     'texs': 'tex'}
+
+
+def get_default_txt2tags_cmd():
+    return [TXT2TAGS, '-q', '--no-rc']
 
 
 def get_output(cmd):
@@ -64,7 +65,7 @@ def getCurrentDate():
 
 
 def _convert(options, module_dir):
-    cmdline = ' '.join([PYTHON] + TXT2TAGS + options)
+    cmdline = ' '.join([PYTHON] + get_default_txt2tags_cmd() + options)
     print 'Calling "%s" in "%s"' % (cmdline, module_dir)
     return subprocess.call(cmdline, shell=True, cwd=module_dir)
 

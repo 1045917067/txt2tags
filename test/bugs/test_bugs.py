@@ -22,7 +22,7 @@ def run():
         basename = infile.replace('.t2t', '')
         outfile = basename + '.html'
         print '  Testing %s ...' % basename,
-        cmdline = lib.TXT2TAGS + [infile]
+        cmdline = lib.get_default_txt2tags_cmd() + [infile]
         output = lib.get_output(cmdline)
         if not output:
             os.remove(outfile)
