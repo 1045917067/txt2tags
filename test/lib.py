@@ -72,11 +72,11 @@ def _convert(options, module_dir):
 
 def _diff(outfile, okfile):
     out = read_file(outfile)
-    os.remove(outfile)
     out = remove_version(out)
-    ok = read_file(okfile)
-    ok = remove_version(ok)
-    assert out == ok
+    expected = read_file(okfile)
+    expected = remove_version(expected)
+    assert out == expected
+    os.remove(outfile)
 
 
 def remove_version(text):
